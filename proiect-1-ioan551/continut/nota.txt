@@ -1,0 +1,21 @@
+JAVA SCRIPT 
+
+document.getElement("cevaid").innerHTML="Exemplu"
+
+Ca la css (intern / extern / inline)
+	<scrip>
+		ceva
+	</script>
+
+<script lang="javascript" src=".js"> 
+</script>
+
+<img src="ceva" onclick="numeFunctie();" />
+
+function numeFunctie(...)
+{ 
+	... 
+		....
+} 
+
+
