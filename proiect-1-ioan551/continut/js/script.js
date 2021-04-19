@@ -8,14 +8,20 @@ function func() {
     var string1 = azi.getHours() + ":" + azi.getMinutes() + ":" + azi.getSeconds();
 
     var string2 = string + " " + string1;
-    document.getElementById("data").innerHTML = "<b>Data si ora curenta: </b>" + string2;
-
+    if(document.getElementById("data") != null)
+    { 
+        document.getElementById("data").innerHTML = "<b>Data si ora curenta: </b>" + string2;
+    } 
     
 
     var loc = window.location;
     var nav = window.navigator;
-    document.getElementById("detalii").innerHTML = "<b>Location : </b>" + loc.href + "<br><br><b> Browser name: </b>" + nav.appName + "<br><br> <b>App version: </b>" + nav.appVersion + "<br><br> <b>Platforma : </b>" + nav.platform;
 
+    if(document.getElementById("detalii"))
+    { 
+        document.getElementById("detalii").innerHTML = "<b>Location : </b>" + loc.href + "<br><br><b> Browser name: </b>" + nav.appName + "<br><br> <b>App version: </b>" + nav.appVersion + "<br><br> <b>Platforma : </b>" + nav.platform;
+    }
+    
 }
 
 function showPosition() {
@@ -124,17 +130,47 @@ function schimbaContinut(resursa,jsFisier,jsFunctie) {
     xmlhttp.send(); 
 }
 
+var x,y; 
+var ok = 0; 
 
-function display(){ 
-    var canv = document.getElementById("canvas"); 
-    var cont = canv.getContext("2d");
-    cont.rect(75,25,150,150); 
-    cont.fillStyle = document.getElementById("umplere").value; 
-    cont.fill(); 
-    
-    cont.lineWidth = "10";
-    cont.strokeStyle =  document.getElementById("CuloareContur").value;
-    cont.stroke(); 
+function display(event){ 
+    if(ok == 0)
+    { 
+        x = event.offsetX; 
+        y = event.offsetY;
+        ok = 1; 
+    }
+    else 
+    { 
+        ok = 0; 
+        x1 = event.offsetX; 
+        y1 = event.offsetY;
+
+        var canv = document.getElementById("canvas"); 
+        var cont = canv.getContext("2d");
+
+        cont.lineWidth = "2";
+        cont.moveTo(x,y); 
+        cont.lineTo(x,y1); 
+        cont.lineTo(x1,y1);
+        cont.lineTo(x1,y);
+        cont.lineTo(x,y);
+        cont.strokeStyle =  document.getElementById("CuloareContur").value;
+        cont.stroke();
+        cont.beginPath(); 
+
+        cont.rect(x,y,x1-x,y1-y); 
+        cont.fillStyle = document.getElementById("umplere").value; 
+        cont.fill(); 
+        
+        
+        
+        cont.stroke();
+
+    }
+     
+
+     
 }
 
 
@@ -187,8 +223,27 @@ function fun(){
     
     xhttp.onreadystatechange = function(){ 
         if(this.readyState == 4 && this.status == 200){ 
-            var ceva = JSON.parse(this);
-            document.getElementById("ver").innerHTML = "a";
+            var ceva = JSON.parse(this.responseText);
+            var ok = false; 
+            console.log(ceva);
+            for(var index = 0 ; index < ceva.length ; index++)
+            { 
+                if(ceva[index].utilizator == document.getElementById("utilizator").value && 
+                    ceva[index].parola == document.getElementById("parola").value)
+                { 
+                    ok = true; 
+                }
+            }
+
+            if(ok == true)
+            { 
+                document.getElementById("ver").innerHTML = "Exista" ;
+            }
+            else 
+            { 
+                document.getElementById("ver").innerHTML = "Nu Exista" ;
+            }
+              
         }
     }; 
     xhttp.open("GET","/resurse/utilizatori.json",true);

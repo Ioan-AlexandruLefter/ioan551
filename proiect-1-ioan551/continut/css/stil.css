@@ -1,9 +1,22 @@
-body {
-	margin: 10px;
+
+
+header{ 
+	width:100%;
+	height: 110px; 
+	float:top;
+	text-align: center;
 }
-.bg {
-	background: url(imagini/bg1.jpg) no-repeat center fixed;
-	background-size: cover;
+
+#img1{ 
+	float:left; 
+	width:150px; 
+	height: 100px;
+}
+
+#img2{ 
+	float:right; 
+	width:150px; 
+	height: 100px;
 }
 
 button {
@@ -95,6 +108,36 @@ footer{
 	float:inline-end;
 	margin-top: auto;
 }
+
+.flexi-box-1{
+	display:flex;
+	flex-direction: column;
+}
+
+.flexi-box-2{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+}
+.flexi-box-2 div.flex-inner{
+	width: 48%;
+	align-content: center;
+
+}
+
+.flexi-box-2 img{ 
+	margin-left: 220px;
+}
+
+.flexi-box-4{
+	display: flex;
+	flex-direction: row;
+}
+.flexi-box-4 div.flex-inner{
+	width: 25%;
+}
+
 
 
 @media screen and (max-width: 1000px){

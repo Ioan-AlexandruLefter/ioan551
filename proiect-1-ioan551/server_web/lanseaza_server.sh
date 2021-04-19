@@ -1,1 +1,1 @@
-python3 ServerWeb.py
+python ServerWeb.py

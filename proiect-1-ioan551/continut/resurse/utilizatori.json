@@ -1,6 +1,12 @@
 [
     { 
-        "utilizator": "test",
-        "parola": "test" 
-    }
+        "utilizator":"admin",
+        "parola":"admin"
+    }, 
+
+    { 
+        "utilizator":"test",
+        "parola":"test"
+    } 
 ]
+

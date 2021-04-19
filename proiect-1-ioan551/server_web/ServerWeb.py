@@ -1,3 +1,4 @@
+
 import socket
 import os # pentru dimensiunea fisierului
 
